@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import profile from './profile'
 import loan from './loan'
-import upfrontCosts from './costs'
+import costs from './costs'
 
-export default combineReducers({ loan, upfrontCosts, profile })
+export default combineReducers({ loan, costs, profile })

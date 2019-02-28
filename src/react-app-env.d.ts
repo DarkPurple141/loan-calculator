@@ -2,6 +2,6 @@
 
 declare interface ReduxAction {
     type: string,
-    payload: object
+    payload: any
 }
 
