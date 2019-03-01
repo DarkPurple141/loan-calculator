@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ profile }) => {
     return {
-        ...state.profile
+        ...profile
     }
 }
 
@@ -12,7 +12,7 @@ class MyInfo extends Component {
         return (
             <div className='Profile'>
                 <h1>Profile</h1>
-                {Object.keys(this.props).map(key => <p>{ key }</p>)}
+                {Object.entries(this.props).map(([key, value]) => <p>{ key }: { value }</p>)}
             </div>
         )
     }

@@ -1,18 +1,5 @@
-import {SET_AMOUNT, SET_PERIOD, SET_REPAYMENT} from './actions'
-import {REPAYMENT_TYPE, REPAYMENT_FREQUENCY} from './loan'
-
-interface LoanState {
-    /* borrowing amount */
-    amount: number,
-    /* eg 30 years */
-    period: number,
-    /* as defined */
-    repaymentType: REPAYMENT_TYPE,
-    /* repayment frequency */
-    repaymentFrequency: REPAYMENT_FREQUENCY,
-    /* interest rate */
-    rate: number,
-}
+import { SET_LOAN } from './actions'
+import LoanState, {REPAYMENT_TYPE, REPAYMENT_FREQUENCY} from './models'
 
 const initialState: LoanState = {
     amount: 0,
@@ -26,20 +13,9 @@ export default function (state: LoanState = initialState, action: ReduxAction): 
     const { type } = action
 
     switch (type) {
-        case SET_AMOUNT: 
+        case SET_LOAN: 
             return {
-                ...state,
-                amount: action.payload
-            }
-        case SET_PERIOD:
-            return {
-                ...state,
-                period: action.payload
-            }
-        case SET_REPAYMENT:
-            return {
-                ...state,
-                repaymentType: action.payload
+                ...action.payload
             }
         default:
             return state

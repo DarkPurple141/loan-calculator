@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ costs }) => {
     return {
-        ...state.costs
+        ...costs
     }
 }
 
@@ -12,7 +12,7 @@ class Costs extends Component {
         return (
             <div className='Costs'>
                 <h1>Costs</h1>
-                {Object.keys(this.props).map(key => <p>{ key }</p>)}
+                {Object.entries(this.props).map(([key, value]) => <p>{ key }: { value }</p>)}
             </div>
         )
     }

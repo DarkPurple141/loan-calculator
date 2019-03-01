@@ -1,21 +1,9 @@
-import {REPAYMENT_TYPE, REPAYMENT_FREQUENCY} from './loan'
+import LoanState from './models'
 
-export const SET_AMOUNT = 'SET_AMOUNT'
-export const SET_PERIOD = 'SET_PERIOD'
-export const SET_REPAYMENT = 'SET_REPAYMENT'
+export const SET_LOAN = 'SET_LOAN'
 
 // action creators
-export const setAmount = (amount: number): ReduxAction => ({
-    type: SET_AMOUNT,
-    payload: amount
-})
-
-export const setPeriod = (period: number): ReduxAction => ({
-    type: SET_PERIOD,
-    payload: period
-})
-
-export const setRepaymentType = (repaymentType: REPAYMENT_TYPE) => ({
-    type: SET_REPAYMENT,
-    payload: repaymentType
+export const setLoan = (newState: LoanState): ReduxAction => ({
+    type: SET_LOAN,
+    payload: newState
 })
