@@ -3,7 +3,7 @@
     "target": "es5",
     "module": "esnext",
     "lib": [
-      "es6"
+      "es2017"
     ],
     "removeComments": false,
     "stripInternal": true,
