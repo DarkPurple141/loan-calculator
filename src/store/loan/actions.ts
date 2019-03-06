@@ -1,9 +1,12 @@
-import LoanState from './models'
-
 export const SET_LOAN = 'SET_LOAN'
+import { LoanActionPayload } from './models'
 
-// action creators
-export const setLoan = (newState: LoanState): ReduxAction => ({
+export const setLoan = ({
+    value,
+    key
+}: LoanActionPayload): ReduxAction => ({
     type: SET_LOAN,
-    payload: newState
+    data: {
+        [key]: value
+    }
 })

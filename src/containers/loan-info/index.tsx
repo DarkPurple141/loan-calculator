@@ -1,24 +1,63 @@
-import React, { Component } from 'react'
+import React, { Component, Dispatch } from 'react'
 import { connect } from 'react-redux';
+import State from '../../store/selectors';
+import { setLoan } from '../../store/loan/actions'
+import { REPAYMENT_FREQUENCY, LoanActionPayload } from '../../store/loan/models';
 
-import { AppStore } from '../../store/root';
+interface LoanProps {
+    rate: number,
+    period: number,
+    repayments: REPAYMENT_FREQUENCY,
+    borrowing: number,
+}
 
-const mapStateToProps = ({ loan }: AppStore) => {
+interface LoanActions {
+    updateLoan: Function
+}
+
+const mapStateToProps = ({ loan }: State): LoanProps => {
     return {
-        ...loan
+        rate: loan.rate,
+        period: loan.period,
+        repayments: loan.repaymentFrequency,
+        borrowing: loan.amount
     }
 }
 
-class LoanInfo extends Component {
+const mapDispatchToProps = (dispatch: Dispatch<ReduxAction>): LoanActions => {
+    return {
+        updateLoan: (payload: LoanActionPayload) => dispatch(
+            setLoan(payload)
+        )
+    }
+}
+
+class LoanInfo extends Component<LoanProps & LoanActions> {
+
+    onChangeHandler = (key: string) => (e: React.FormEvent<HTMLInputElement>): void => {    
+        const input = e.target as any
+
+        this.props.updateLoan({
+            key,
+            value: Number(input.value)
+        })
+    }
+
     render() {
+        const { rate, period, borrowing } = this.props
+        console.info(this.props)
         return (
             <div className='LoanInfo'>
                 <h1>Loan Info</h1>
-                
-                {Object.entries(this.props).map(([key, value]) => <p>{ key }: { value }</p>)}
+                <label>Amount to borrow</label>
+                <input type="number" name="amount" value={borrowing} onChange={this.onChangeHandler('amount')}/>
+                <label>Rate</label>
+                <input type="number" name="rate"   value={rate} onChange={this.onChangeHandler('rate')}/>
+                <label>Loan Period (years)</label>
+                <input type="number" name="period" value={period} onChange={this.onChangeHandler('period')}/>
             </div>
         )
     }
 }
 
-export default connect(mapStateToProps)(LoanInfo)
+export default connect(mapStateToProps, mapDispatchToProps)(LoanInfo)

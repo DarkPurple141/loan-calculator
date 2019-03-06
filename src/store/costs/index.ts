@@ -9,12 +9,12 @@ const initialState: PurchaseCosts = {
 }
 
 export default function (state = initialState, action: ReduxAction) {
-    const { type } = action
+    const { type, data } = action
 
     switch (type) {
         case SET_COSTS:
             return {
-                ...action.payload
+                ...data
             }
         default: 
             return state

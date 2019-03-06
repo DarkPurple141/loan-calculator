@@ -4,11 +4,17 @@ export default interface LoanState {
     /* eg 30 years */
     period: number,
     /* as defined */
-    repaymentType: REPAYMENT_TYPE,
+    repaymentType?: REPAYMENT_TYPE,
     /* repayment frequency */
     repaymentFrequency: REPAYMENT_FREQUENCY,
     /* interest rate */
     rate: number,
+}
+
+// action creators
+export interface LoanActionPayload {
+    value: number | string,
+    key: string
 }
 
 export enum REPAYMENT_TYPE {

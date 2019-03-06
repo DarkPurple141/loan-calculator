@@ -9,12 +9,12 @@ export default function (
     state: ProfileState = initialState,
     action: ReduxAction
 ) {
-    const { type } = action
+    const { type, data } = action
 
     switch (type) {
         case SET_PROFILE:
             return {
-                ...action.payload
+                ...data
             }
 
         default: return state
