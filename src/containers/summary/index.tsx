@@ -18,8 +18,8 @@ class Summary extends Component<SummaryProps> {
     render() {
         return (
             <div className='Summary'>
-                <h1>Summary</h1>       
-                position: { this.props.position }
+                <h2>Summary</h2>       
+                <p>position: { this.props.position }</p>
             </div>
         )
     }
