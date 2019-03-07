@@ -5,13 +5,14 @@ import UpfrontCosts from './upfront-costs'
 import Summary from './summary'
 
 const App = () => (
-  <div>
+  <main>
     <h1>How much can I afford?</h1>
-    <LoanInfo />
+    <p>People often tackle this sort of thing upside down; trying to find additional money to stretch themselves rather than making a realistic estimate of what they can truly afford. This tool tries to properly quantify that to help you avoid unnecessary financial stress and to provide a better overview of what sort of property price you should be targeting.</p>
     <MyInfo />
+    <LoanInfo />
     <UpfrontCosts />
     <Summary />
-  </div>
+  </main>
 )
 
 export default App;

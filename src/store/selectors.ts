@@ -9,9 +9,26 @@ export default interface State {
 }
 
 const sum = (acc: number, curr: number) => acc + curr
+const multiplier = (p: Period): number => {
+    let m: number
+
+    switch (p) {
+        case "Weekly": m = 52
+        case "Fortnightly": m = 26
+        case "Monthly": m = 12
+        case "Yearly": default: m = 1
+    }
+
+    return m
+}
 
 export const getIncome = (profile: Profile): number => {
-    return profile.income
+    const { incomeA, incomeB } = profile
+
+    const annualisedIncomeA = incomeA.value * multiplier(incomeA.period)
+    const annualisedIncomeB = incomeB.value * multiplier(incomeB.period)
+
+    return annualisedIncomeA + annualisedIncomeB
 }
 
 export const getLivingExpenses = (profile: Profile): number => {

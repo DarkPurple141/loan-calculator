@@ -11,7 +11,7 @@ class Costs extends Component {
     render() {
         return (
             <div className='Costs'>
-                <h1>Costs</h1>
+                <h2>Costs</h2>
                 {Object.entries(this.props).map(([key, value]) => <p>{ key }: { value }</p>)}
             </div>
         )

@@ -10,3 +10,5 @@ declare interface ReduxAction {
     type: string,
     data: object
 }
+
+declare type Period = 'Weekly' | 'Fortnightly' | 'Monthly' | 'Yearly'

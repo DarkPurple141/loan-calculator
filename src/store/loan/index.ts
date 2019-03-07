@@ -18,7 +18,6 @@ export default function (
 
     switch (type) {
         case SET_LOAN: 
-            console.log('payload\n', data, 'state\n', state)
             return {
                 ...state,
                 ...data

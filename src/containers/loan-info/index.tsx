@@ -1,8 +1,8 @@
 import React, { Component, Dispatch } from 'react'
-import { connect } from 'react-redux';
-import State from '../../store/selectors';
+import { connect } from 'react-redux'
+import State from '../../store/selectors'
 import { setLoan } from '../../store/loan/actions'
-import { REPAYMENT_FREQUENCY } from '../../store/loan/models';
+import { REPAYMENT_FREQUENCY } from '../../store/loan/models'
 
 interface LoanProps {
     rate: number,
@@ -35,11 +35,11 @@ const mapDispatchToProps = (dispatch: Dispatch<ReduxAction>): LoanActions => {
 class LoanInfo extends Component<LoanProps & LoanActions> {
 
     onChangeHandler = (key: string) => (e: React.FormEvent<HTMLInputElement>): void => {    
-        const input = e.target as any
+        const value = Number((e.target as any).value)
 
         this.props.updateLoan({
             key,
-            value: Number(input.value)
+            value
         })
     }
 
@@ -47,7 +47,7 @@ class LoanInfo extends Component<LoanProps & LoanActions> {
         const { rate, period, borrowing } = this.props
         return (
             <div className='LoanInfo'>
-                <h1>Loan Info</h1>
+                <h2>Loan Info</h2>
                 <label>Amount to borrow</label>
                 <input type="number" name="amount" value={borrowing} onChange={this.onChangeHandler('amount')}/>
                 <label>Rate</label>

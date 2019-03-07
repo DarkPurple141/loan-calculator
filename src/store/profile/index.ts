@@ -2,7 +2,14 @@ import ProfileState from './models'
 import { SET_PROFILE } from './actions'
 
 const initialState: ProfileState = {
-    income: 0,
+    incomeA: {
+        value: 0,
+        period: "Monthly"
+    },
+    incomeB: {
+        value: 0,
+        period: "Monthly"
+    },
     livingExpenses: [{
         label: 'daycare',
         cost: 100

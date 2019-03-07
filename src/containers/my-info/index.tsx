@@ -18,13 +18,16 @@ class MyInfo extends Component<ProfileState & ProfileDispatchers> {
     }
 
     render() {
-        const { income, livingExpenses } = this.props
+        const { incomeA, incomeB, livingExpenses } = this.props
         return (
             <div className='Profile'>
-                <h1>Profile</h1>
-                <label>Current Annual Income</label>
-                <input type="number" name="income" value={income} onChange={this.onUpdateIncome}/>
-                <label>Living Expenses</label>
+                <h2>Profile</h2>
+                <label>Your Income</label>
+                <input type="number" name="incomeA" value={incomeA.value} onChange={this.onUpdateIncome}/>
+                <label>Partner Income</label>
+                <input type="number" name="incomeB" value={incomeB.value} onChange={this.onUpdateIncome}/>
+                <hr/>
+                <h2>Living Expenses</h2>
                 { livingExpenses && livingExpenses.map(
                     ({ label, cost }) => 
                         <React.Fragment key={label}>
@@ -47,7 +50,7 @@ const mapDispatchToProps = (dispatch: Dispatch<ReduxAction>): ProfileDispatchers
     return {
         updateIncome: (value: number) => dispatch(
             setProfile({
-                key: 'income',
+                key: 'incomeA',
                 value
             })
         )

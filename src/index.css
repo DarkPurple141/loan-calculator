@@ -4,9 +4,42 @@ body {
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #1a2234;
+}
+
+main {
+  width: 85%;
+  margin: 50px auto;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, monospace;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: white;
+}
+
+p, label, input {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+input {
+  margin: 0 5px;
+  font: inherit;
+  background: none;
+  border: none;
+  border-bottom: 2px solid #3E50B4;
+  text-align: right;
+}
+
+input:hover, input:focus, input:active {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
