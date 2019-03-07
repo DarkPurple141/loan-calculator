@@ -8,12 +8,16 @@ const initialState: PurchaseCosts = {
     stampDuty: 0
 }
 
-export default function (state = initialState, action: ReduxAction) {
+export default function (
+    state = initialState,
+    action: ReduxAction
+): PurchaseCosts {
     const { type, data } = action
 
     switch (type) {
         case SET_COSTS:
             return {
+                ...state,
                 ...data
             }
         default: 

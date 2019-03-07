@@ -2,7 +2,7 @@ import React, { Component, Dispatch } from 'react'
 import { connect } from 'react-redux';
 import State from '../../store/selectors';
 import { setLoan } from '../../store/loan/actions'
-import { REPAYMENT_FREQUENCY, LoanActionPayload } from '../../store/loan/models';
+import { REPAYMENT_FREQUENCY } from '../../store/loan/models';
 
 interface LoanProps {
     rate: number,
@@ -26,7 +26,7 @@ const mapStateToProps = ({ loan }: State): LoanProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch<ReduxAction>): LoanActions => {
     return {
-        updateLoan: (payload: LoanActionPayload) => dispatch(
+        updateLoan: (payload: ActionPayload) => dispatch(
             setLoan(payload)
         )
     }
@@ -45,7 +45,6 @@ class LoanInfo extends Component<LoanProps & LoanActions> {
 
     render() {
         const { rate, period, borrowing } = this.props
-        console.info(this.props)
         return (
             <div className='LoanInfo'>
                 <h1>Loan Info</h1>

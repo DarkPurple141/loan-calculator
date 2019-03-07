@@ -1,7 +1,12 @@
 /// <reference types="react-scripts" />
 
-declare interface ReduxAction {
-    type: string,
-    data: any
+// action creators
+declare interface ActionPayload {
+    value: number | string,
+    key: string
 }
 
+declare interface ReduxAction {
+    type: string,
+    data: object
+}

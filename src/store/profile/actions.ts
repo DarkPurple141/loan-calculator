@@ -1,9 +1,12 @@
-import ProfileState from './models'
-
 export const SET_PROFILE = 'SET_PROFILE'
 
 // action creators
-export const setProfile = (newState: ProfileState): ReduxAction => ({
+export const setProfile = ({
+    value,
+    key
+}: ActionPayload): ReduxAction => ({
     type: SET_PROFILE,
-    data: newState
+    data: {
+        [key]: value
+    }
 })

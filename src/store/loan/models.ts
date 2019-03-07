@@ -11,12 +11,6 @@ export default interface LoanState {
     rate: number,
 }
 
-// action creators
-export interface LoanActionPayload {
-    value: number | string,
-    key: string
-}
-
 export enum REPAYMENT_TYPE {
     INTEREST_ONLY = 'Interest only',
     PRINCIPAL_AND_INTEREST = 'Principle and interest'

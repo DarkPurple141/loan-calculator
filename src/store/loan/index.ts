@@ -1,5 +1,5 @@
 import { SET_LOAN } from './actions'
-import LoanState, {REPAYMENT_TYPE, REPAYMENT_FREQUENCY} from './models'
+import LoanState, { REPAYMENT_TYPE, REPAYMENT_FREQUENCY } from './models'
 
 const initialState: LoanState = {
     amount: 0,
@@ -11,7 +11,9 @@ const initialState: LoanState = {
 
 export default function (
     state: LoanState = initialState,
-    action: ReduxAction): LoanState {
+    action: ReduxAction
+): LoanState 
+{
     const { type, data } = action
 
     switch (type) {
