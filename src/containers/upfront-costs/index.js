@@ -10,7 +10,7 @@ const mapStateToProps = ({ costs }) => {
 class Costs extends Component {
     render() {
         return (
-            <div className='Costs'>
+            <div className='costs'>
                 <h2>Costs</h2>
                 {Object.entries(this.props).map(([key, value]) => <p>{ key }: { value }</p>)}
             </div>

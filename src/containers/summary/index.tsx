@@ -3,12 +3,9 @@ import { connect } from 'react-redux';
 
 import State, { getSummary } from '../../store/selectors';
 
-const mapStateToProps = (store: State) => {
-
-    return {
-        position: getSummary(store)
-    }
-}
+const mapStateToProps = (store: State) => ({
+    position: getSummary(store)
+})
 
 interface SummaryProps {
     position: number

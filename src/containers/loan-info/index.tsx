@@ -46,12 +46,12 @@ class LoanInfo extends Component<LoanProps & LoanActions> {
     render() {
         const { rate, period, borrowing } = this.props
         return (
-            <div className='LoanInfo'>
+            <div className='loan-info'>
                 <h2>Loan Info</h2>
                 <label>Amount to borrow</label>
                 <input type="number" name="amount" value={borrowing} onChange={this.onChangeHandler('amount')}/>
                 <label>Rate</label>
-                <input type="number" name="rate"   value={rate} onChange={this.onChangeHandler('rate')}/>
+                <input type="number" name="rate" data-percent="" value={rate} onChange={this.onChangeHandler('rate')}/>
                 <label>Loan Period (years)</label>
                 <input type="number" name="period" value={period} onChange={this.onChangeHandler('period')}/>
             </div>

@@ -3,8 +3,6 @@ type livingExpense = {
     cost: number
 }
 
-type Period = 'Weekly' | 'Fortnightly' | 'Monthly' | 'Yearly'
-
 type Income = {
     value: number,
     period: Period
@@ -13,5 +11,5 @@ type Income = {
 export default interface Profile {
     incomeA: Income,
     incomeB: Income,
-    livingExpenses?: livingExpense[]
+    livingExpenses: livingExpense[]
 }
