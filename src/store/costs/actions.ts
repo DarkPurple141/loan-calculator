@@ -1,10 +1,11 @@
-export const SET_COSTS = 'SET_COSTS'
+import { ReduxAction } from '../../types.lib'
+import * as actions from './action-types'
 
 export const setCosts = ({
     value,
     key
 }: ActionPayload): ReduxAction => ({
-    type: SET_COSTS,
+    type: actions.SET_COSTS,
     data: {
         [key]: value
     }

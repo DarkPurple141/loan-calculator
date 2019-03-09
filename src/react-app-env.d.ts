@@ -2,13 +2,8 @@
 
 // action creators
 declare interface ActionPayload {
-    value: number | string,
+    value?: number | string,
     key: string
-}
-
-declare interface ReduxAction {
-    type: string,
-    data: object
 }
 
 declare type Period = 'Weekly' | 'Fortnightly' | 'Monthly' | 'Yearly'

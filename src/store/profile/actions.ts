@@ -1,23 +1,44 @@
-export const SET_PROFILE = 'SET_PROFILE'
-export const UPDATE_EXPENSE = 'UPDATE_EXPENSE'
+import * as actions from './action-types'
+import { ReduxAction } from '../../types.lib'
+import { ActionCreator } from 'redux';
 
 // action creators
-export const setProfile = ({
+export const updateIncome: ActionCreator<ReduxAction> = ({
     value,
     key
 }: ActionPayload): ReduxAction => ({
-    type: SET_PROFILE,
+    type: actions.SET_PROFILE,
     data: {
         [key]: value
     }
 })
 
-export const updateExpense = ({
+export const addExpense: ActionCreator<ReduxAction> = ({
     key,
     value
 }: ActionPayload): ReduxAction => ({
-    type: UPDATE_EXPENSE,
+    type: actions.ADD_EXPENSE,
+    data: {
+        label: key,
+        cost: value
+    }
+})
+
+export const updateExpense: ActionCreator<ReduxAction> = ({
+    key,
+    value
+}: ActionPayload): ReduxAction => ({
+    type: actions.UPDATE_EXPENSE,
     data: {
         [key]: value
+    }
+})
+
+export const deleteExpense: ActionCreator<ReduxAction> = ({
+    key,
+}: ActionPayload): ReduxAction => ({
+    type: actions.DELETE_EXPENSE,
+    data: {
+        key
     }
 })

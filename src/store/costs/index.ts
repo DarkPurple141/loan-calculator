@@ -1,5 +1,6 @@
+import { ReduxAction } from '../../types.lib'
 import PurchaseCosts from './models'
-import { SET_COSTS } from './actions';
+import * as actions from './action-types';
 
 const initialState: PurchaseCosts = {
     conveyancing: 1500,
@@ -15,7 +16,7 @@ export default function (
     const { type, data } = action
 
     switch (type) {
-        case SET_COSTS:
+        case actions.SET_COSTS:
             return {
                 ...state,
                 ...data

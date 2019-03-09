@@ -1,10 +1,11 @@
-export const SET_LOAN = 'SET_LOAN'
+import * as actions from './action-types'
+import { ReduxAction } from '../../types.lib'
 
 export const setLoan = ({
     value,
     key
 }: ActionPayload): ReduxAction => ({
-    type: SET_LOAN,
+    type: actions.SET_LOAN,
     data: {
         [key]: value
     }

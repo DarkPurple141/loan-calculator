@@ -1,5 +1,6 @@
 import ProfileState from './models'
-import { SET_PROFILE, UPDATE_EXPENSE } from './actions'
+import * as actions from './action-types'
+import { ReduxAction } from '../../types.lib';
 
 const initialState: ProfileState = {
     incomeA: {
@@ -24,20 +25,42 @@ export default function (
     console.info('here', data, type)
 
     switch (type) {
-        case SET_PROFILE:
+        case actions.SET_PROFILE:
             return {
                 ...state,
                 ...data
             }
-        case UPDATE_EXPENSE:
-            const [key, value] = Object.entries(data)[0]
-            console.info('here', key, value)
+        case actions.ADD_EXPENSE:
+            const { label, cost } = data as any
+            if (state.livingExpenses.find(
+                ({ label: existingLabel }) => existingLabel === label))
+                return {
+                    ...state
+                }
             return {
                 ...state,
                 livingExpenses: state.livingExpenses
-                    .map(item => {
+                    .concat({
+                        label,
+                        cost
+                    })
+            }
+        case actions.DELETE_EXPENSE:
+            const { key: toDelete } = data as any
+            return {
+                ...state,
+                livingExpenses: state.livingExpenses
+                    .filter(({ label }) => toDelete !== label)
+            }
+
+        case actions.UPDATE_EXPENSE:
+            const [key, value] = Object.entries(data)[0]
+            return {
+                ...state,
+                livingExpenses: state.livingExpenses
+                    .map((item) => {
                         if (item.label === key) {
-                            item.cost = value
+                            item.cost = (value as number)
                         }
                         return item
                     })

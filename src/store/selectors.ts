@@ -8,7 +8,7 @@ export default interface State {
     loan: Loan
 }
 
-const sum = (acc: number, curr: number) => acc + curr
+const sum = (acc: number, curr: number) => acc + Number(curr)
 const multiplier = (p: Period): number => {
     let m: number
 

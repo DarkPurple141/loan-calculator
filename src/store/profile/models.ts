@@ -1,9 +1,9 @@
-type livingExpense = {
+export type livingExpense = {
     label: string,
     cost: number
 }
 
-type Income = {
+export type Income = {
     value: number,
     period: Period
 }

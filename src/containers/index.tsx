@@ -11,8 +11,15 @@ const App = () => (
     <MyInfo />
     <LoanInfo />
     <UpfrontCosts />
+    { 
+    /* 
+      Different metrics, 
+      scenarios for interest rates, jobs 
+    */
+    }
     <Summary />
   </main>
 )
+
 
 export default App;

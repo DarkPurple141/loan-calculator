@@ -1,13 +1,16 @@
 import React, { Component, Dispatch } from 'react'
+import { bindActionCreators, AnyAction } from 'redux'
 import { connect } from 'react-redux';
 
 import State from '../../store/selectors';
-import { setProfile, updateExpense } from '../../store/profile/actions';
+import * as profileActions from '../../store/profile/actions';
 import ProfileState from '../../store/profile/models';
 
-interface ProfileDispatchers {
-    updateIncome: (key: string, value: number) => void,
-    updateExpense: (key: string, cost: number) => void
+interface ProfileDispatchers<T> {
+    updateIncome: (payload: T) => void,
+    updateExpense: (payload: T) => void,
+    addExpense: (payload: T) => void,
+    deleteExpense: (payload: T) => void
 }
 
 interface FormState {
@@ -16,27 +19,31 @@ interface FormState {
 }
 
 const defaultState = {
-    label: 'Your expense name',
+    label: '',
     cost: 0
 }
 
-class MyInfo extends Component<ProfileState & ProfileDispatchers, FormState> {
+class MyInfo extends Component<ProfileState & ProfileDispatchers<ActionPayload>, FormState> {
 
-    constructor(props: ProfileState & ProfileDispatchers) {
+    constructor(props: ProfileState & ProfileDispatchers<ActionPayload>) {
         super(props)
         this.state = defaultState
     }
 
     onUpdateIncome = (key: string) => (event: React.FormEvent<HTMLInputElement>) => {
         const { value } = (event.target as any)
-        this.props.updateIncome(key, value)
+        this.props.updateIncome({key, value})
     }
 
-    onUpdateExpense = (key: string, cost: number) => {
-        this.props.updateExpense(key, cost)
+    onUpdateExpense = (key: string, value: number) => {
+        this.props.updateExpense({key, value})
     }
 
     onButtonClick = () => {
+        this.props.addExpense({
+            key: this.state.label,
+            value: this.state.cost
+        })
         this.setState(defaultState)
     }
 
@@ -56,11 +63,12 @@ class MyInfo extends Component<ProfileState & ProfileDispatchers, FormState> {
                         <React.Fragment key={label}>
                             <label>{ label }</label>
                             <input type="number" name="rate" value={cost} onChange={(e: any) => this.onUpdateExpense(label, Number(e.target.value))}/> 
+                            <button onClick={() => this.props.deleteExpense({ key: label })}>X</button>
                         </React.Fragment>
                 )}
                 <p>Add an expense</p>
-                <input type="text"   name="newLabel" value={this.state.label} placeholder={defaultState.label}  onChange={(e: any) => this.setState({ label: e.currentTarget.value })} />
-                <input type="number" name="newCost"  value={this.state.cost} placeholder={`$${defaultState.cost}`} onChange={(e: any) => this.setState({ cost: e.currentTarget.value })}/> 
+                <input type="text"   name="newLabel" value={this.state.label} placeholder='Your expense name'  onChange={(e: any) => this.setState({ label: e.currentTarget.value })} />
+                <input type="number" name="newCost"  value={undefined && this.state.cost} placeholder={`$0`} onChange={(e: any) => this.setState({ cost: Number(e.currentTarget.value) })}/> 
                 <button onClick={this.onButtonClick}>Add</button>
             </div>
         )
@@ -73,21 +81,9 @@ const mapStateToProps = ({ profile }: State): ProfileState => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<ReduxAction>): ProfileDispatchers => {
-    return {
-        updateIncome: (key: string, value: number) => dispatch(
-            setProfile({
-                key,
-                value
-            })
-        ),
-        updateExpense: (key: string, value: number) => dispatch(
-            updateExpense({
-                key,
-                value
-            })
-        )
-    }
+const mapDispatchToProps = (dispatch: any): ProfileDispatchers<ActionPayload> => {
+    return bindActionCreators(profileActions, dispatch)
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyInfo)

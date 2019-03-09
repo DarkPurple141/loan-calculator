@@ -1,5 +1,6 @@
 import React, { Component, Dispatch } from 'react'
 import { connect } from 'react-redux'
+import { AnyAction } from 'redux'
 import State from '../../store/selectors'
 import { setLoan } from '../../store/loan/actions'
 import { REPAYMENT_FREQUENCY } from '../../store/loan/models'
@@ -24,7 +25,7 @@ const mapStateToProps = ({ loan }: State): LoanProps => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<ReduxAction>): LoanActions => {
+const mapDispatchToProps = (dispatch: Dispatch<AnyAction>): LoanActions => {
     return {
         updateLoan: (payload: ActionPayload) => dispatch(
             setLoan(payload)
