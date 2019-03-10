@@ -1,5 +1,4 @@
 import * as actions from './action-types'
-import { ReduxAction } from '../../types.lib'
 import { ActionCreator } from 'redux';
 
 // action creators

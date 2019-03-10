@@ -1,5 +1,5 @@
-import React, { Component, Dispatch } from 'react'
-import { bindActionCreators, AnyAction } from 'redux'
+import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 
 import State from '../../store/selectors';
@@ -83,7 +83,6 @@ const mapStateToProps = ({ profile }: State): ProfileState => {
 
 const mapDispatchToProps = (dispatch: any): ProfileDispatchers<ActionPayload> => {
     return bindActionCreators(profileActions, dispatch)
-
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyInfo)

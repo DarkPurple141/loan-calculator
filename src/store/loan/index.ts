@@ -1,6 +1,5 @@
 import * as actions from './action-types'
 import LoanState, { REPAYMENT_TYPE, REPAYMENT_FREQUENCY } from './models'
-import { ReduxAction } from '../../types.lib'
 
 const initialState: LoanState = {
     amount: 0,

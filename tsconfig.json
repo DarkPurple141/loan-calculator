@@ -23,6 +23,6 @@
     "jsx": "preserve"
   },
   "include": [
-    "src", "src/types.lib.d.ts"
+    "src", "global.d.ts"
   ]
 }

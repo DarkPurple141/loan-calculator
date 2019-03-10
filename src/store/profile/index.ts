@@ -1,6 +1,5 @@
 import ProfileState from './models'
 import * as actions from './action-types'
-import { ReduxAction } from '../../types.lib';
 
 const initialState: ProfileState = {
     incomeA: {
@@ -22,7 +21,6 @@ export default function (
     action: ReduxAction
 ): ProfileState {
     const { type, data } = action
-    console.info('here', data, type)
 
     switch (type) {
         case actions.SET_PROFILE:
