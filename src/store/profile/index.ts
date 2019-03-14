@@ -4,11 +4,11 @@ import * as actions from './action-types'
 const initialState: ProfileState = {
     incomeA: {
         value: 0,
-        period: "Monthly"
+        period: 'Monthly'
     },
     incomeB: {
         value: 0,
-        period: "Monthly"
+        period: 'Monthly'
     },
     livingExpenses: [{
         label: 'daycare',
@@ -24,9 +24,13 @@ export default function (
 
     switch (type) {
         case actions.SET_PROFILE:
+            let [key, value] = Object.entries(data)[0]
             return {
                 ...state,
-                ...data
+                [key]: {
+                    period: 'Monthly',
+                    value
+                }
             }
         case actions.ADD_EXPENSE:
             const { label, cost } = data as any
@@ -52,7 +56,7 @@ export default function (
             }
 
         case actions.UPDATE_EXPENSE:
-            const [key, value] = Object.entries(data)[0]
+            [key, value] = Object.entries(data)[0]
             return {
                 ...state,
                 livingExpenses: state.livingExpenses

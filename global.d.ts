@@ -5,3 +5,5 @@ declare global {
         data: object
     }
 }
+
+declare module '@atlaskit/*';

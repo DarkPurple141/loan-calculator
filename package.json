@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@atlaskit/field-text": "^8.0.0",
+    "@atlaskit/page-header": "^7.0.0",
     "@types/jest": "^23.3.9",
     "@types/node": "^10.12.5",
     "@types/react": "^16.7.3",
@@ -11,7 +13,7 @@
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
     "react-redux": "^6.0.1",
-    "react-scripts": "^2.1.5",
+    "react-scripts": "^2.1.8",
     "typescript": "^3.3.3333"
   },
   "scripts": {
@@ -28,5 +30,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "styled-components": "^3.4.10"
+  }
 }

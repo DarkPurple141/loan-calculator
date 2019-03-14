@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux';
-
-import State from '../../store/selectors';
-import * as profileActions from '../../store/profile/actions';
-import ProfileState from '../../store/profile/models';
+import TextField from '@atlaskit/field-text'
+import CrossIcon from '@atlaskit/icon/glyph/cross'
+import InlineContainer from '../../components/InlineContainer'
+import { connect } from 'react-redux'
+import State, { getIncome } from '../../store/selectors'
+import * as profileActions from '../../store/profile/actions'
+import ProfileState from '../../store/profile/models'
 
 interface ProfileDispatchers<T> {
     updateIncome: (payload: T) => void,
@@ -23,20 +25,18 @@ const defaultState = {
     cost: 0
 }
 
-class MyInfo extends Component<ProfileState & ProfileDispatchers<ActionPayload>, FormState> {
+type IProps = ProfileState & ProfileDispatchers<ActionPayload> & { income: number}
 
-    constructor(props: ProfileState & ProfileDispatchers<ActionPayload>) {
+class MyInfo extends Component<IProps, FormState> {
+
+    constructor(props: IProps) {
         super(props)
         this.state = defaultState
     }
 
     onUpdateIncome = (key: string) => (event: React.FormEvent<HTMLInputElement>) => {
         const { value } = (event.target as any)
-        this.props.updateIncome({key, value})
-    }
-
-    onUpdateExpense = (key: string, value: number) => {
-        this.props.updateExpense({key, value})
+        this.props.updateIncome({key, value: Number(value)})
     }
 
     onButtonClick = () => {
@@ -48,23 +48,21 @@ class MyInfo extends Component<ProfileState & ProfileDispatchers<ActionPayload>,
     }
 
     render() {
-        const { incomeA, incomeB, livingExpenses } = this.props
+        const { incomeA, incomeB, livingExpenses, income } = this.props
         return (
             <div className='profile'>
-                <h2>Profile</h2>
-                <label>Your Income</label>
-                <input type="number" name="incomeA" value={incomeA.value} onChange={this.onUpdateIncome('incomeA')}/>
-                <label>Partner Income</label>
-                <input type="number" name="incomeB" value={incomeB.value} onChange={this.onUpdateIncome('incomeB')}/>
+                
+                <h2>Profile <code>{ income }</code></h2>
+                <TextField autoFocus type="number" label="Your Income" value={incomeA.value} onChange={this.onUpdateIncome('incomeA')}/>
+                <TextField type="number" label="Your Partner's Income" value={incomeB.value} onChange={this.onUpdateIncome('incomeB')}/>
                 <hr/>
                 <h2>Living Expenses</h2>
                 { livingExpenses && livingExpenses.map(
                     ({ label, cost }) => 
-                        <React.Fragment key={label}>
-                            <label>{ label }</label>
-                            <input type="number" name="rate" value={cost} onChange={(e: any) => this.onUpdateExpense(label, Number(e.target.value))}/> 
-                            <button onClick={() => this.props.deleteExpense({ key: label })}>X</button>
-                        </React.Fragment>
+                        <InlineContainer key={label}>
+                            <TextField type="number" label={label} value={cost} onChange={(e: any) => this.props.updateExpense({ key: label, value: Number(e.target.value) })}/>
+                            <CrossIcon label="close" onClick={() => this.props.deleteExpense({ key: label })}></CrossIcon>
+                        </InlineContainer>
                 )}
                 <p>Add an expense</p>
                 <input type="text"   name="newLabel" value={this.state.label} placeholder='Your expense name'  onChange={(e: any) => this.setState({ label: e.currentTarget.value })} />
@@ -75,9 +73,10 @@ class MyInfo extends Component<ProfileState & ProfileDispatchers<ActionPayload>,
     }
 }
 
-const mapStateToProps = ({ profile }: State): ProfileState => {
+const mapStateToProps = ({ profile }: State): ProfileState & { income: number } => {
     return {
-        ...profile
+        ...profile,
+        income: getIncome(profile)
     }
 }
 

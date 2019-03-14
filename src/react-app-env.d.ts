@@ -7,3 +7,5 @@ declare interface ActionPayload {
 }
 
 declare type Period = 'Weekly' | 'Fortnightly' | 'Monthly' | 'Yearly'
+
+declare module '@atlaskit/*';

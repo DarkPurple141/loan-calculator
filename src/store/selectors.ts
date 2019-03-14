@@ -13,10 +13,10 @@ const multiplier = (p: Period): number => {
     let m: number
 
     switch (p) {
-        case "Weekly": m = 52
-        case "Fortnightly": m = 26
-        case "Monthly": m = 12
-        case "Yearly": default: m = 1
+        case 'Weekly': m = 52; break;
+        case 'Fortnightly': m = 26; break;
+        case 'Monthly': m = 12; break;
+        case 'Yearly': default: m = 1;
     }
 
     return m
