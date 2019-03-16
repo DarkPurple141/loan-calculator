@@ -5,9 +5,7 @@ type Props = {
 }
 
 const container: React.SFC<Props> = ({ children }) => (
-    <div style={{
-        display: 'flex'
-    }}>
+    <div className="input-container">
         {children}
     </div>
 )

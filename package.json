@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@atlaskit/field-text": "^8.0.0",
+    "@atlaskit/form": "^5.2.2",
     "@atlaskit/page-header": "^7.0.0",
     "@types/jest": "^23.3.9",
     "@types/node": "^10.12.5",
