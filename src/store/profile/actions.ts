@@ -23,7 +23,17 @@ export const addExpense: ActionCreator<ReduxAction> = ({
     }
 })
 
-export const updateExpense: ActionCreator<ReduxAction> = ({
+export const updateExpenseLabel: ActionCreator<ReduxAction> = ({
+    key,
+    value
+}: ActionPayload): ReduxAction => ({
+    type: actions.UPDATE_EXPENSE,
+    data: {
+        [key]: value
+    }
+})
+
+export const updateExpenseCost: ActionCreator<ReduxAction> = ({
     key,
     value
 }: ActionPayload): ReduxAction => ({

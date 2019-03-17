@@ -1,27 +1,39 @@
-import React from 'react'
+import React, { ReactNode, KeyboardEvent } from 'react'
 import InlineContainer from './InlineContainer'
 import IconContainer from './IconContainer'
-import TextField from '@atlaskit/field-text'
-import CrossIcon from '@atlaskit/icon/glyph/cross'
+import { FieldTextStateless } from '@atlaskit/field-text'
 
 type Props = {
     label: string,
     cost: number,
-    onDeleteExpense: Function,
-    onUpdateExpense: Function
+    onClickIcon: Function,
+    onEditNumber: Function,
+    onEditText: Function,
+    children: ReactNode,
+    textPlaceholder?: string,
+    numberPlaceholder?: string,
 }
 
-const LivingExpense: React.SFC<Props> = ({
+const didPressEnter = ({ key }: KeyboardEvent) => key === 'Enter'
+const enterHandler = (e: KeyboardEvent, callback: Function) => {
+    if (didPressEnter(e)) callback()
+}
+
+const LivingExpense: React.FunctionComponent<Props> = ({
     label,
     cost,
-    onDeleteExpense,
-    onUpdateExpense
+    onClickIcon,
+    onEditText,
+    onEditNumber,
+    textPlaceholder,
+    numberPlaceholder,
+    children
 }) => (
-    <InlineContainer key={label}>
-        <TextField isLabelHidden type="text" label="" value={label} />
-        <TextField isLabelHidden type="number" label="" value={cost}onChange={(e: any) => onUpdateExpense({ key: label, value: Number(e.target.value) })} />
-        <IconContainer onClick={() => onDeleteExpense({ key: label })}>
-            <CrossIcon size="medium" label="close"></CrossIcon>
+    <InlineContainer>
+        <FieldTextStateless onKeyDown={(e: KeyboardEvent) => enterHandler(e, () => onClickIcon({ key: label }))} placeholder={textPlaceholder} isLabelHidden type="text" label="" value={label} onChange={(e: any) => onEditText({ key: label, value: e.target.value})} />
+        <FieldTextStateless onKeyDown={(e: KeyboardEvent) => enterHandler(e, () => onClickIcon({ key: label }))} placeholder={numberPlaceholder} isLabelHidden type="number" label="" value={cost || ""} onChange={(e: any) => onEditNumber({ key: label, value: Number(e.target.value) })} />
+        <IconContainer onClick={() => onClickIcon({ key: label })}>
+            {children}
         </IconContainer>
     </InlineContainer>
 )

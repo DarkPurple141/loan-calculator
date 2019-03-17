@@ -1,4 +1,5 @@
 import React, { Component, Dispatch } from 'react'
+import { FieldTextStateless as TextField } from '@atlaskit/field-text'
 import { connect } from 'react-redux'
 import { AnyAction } from 'redux'
 import State from '../../store/selectors'
@@ -48,13 +49,10 @@ class LoanInfo extends Component<LoanProps & LoanActions> {
         const { rate, period, borrowing } = this.props
         return (
             <div className='loan-info'>
-                <h2>Loan Info</h2>
-                <label>Amount to borrow</label>
-                <input type="number" name="amount" value={borrowing} onChange={this.onChangeHandler('amount')}/>
-                <label>Rate</label>
-                <input type="number" name="rate" data-percent="" value={rate} onChange={this.onChangeHandler('rate')}/>
-                <label>Loan Period (years)</label>
-                <input type="number" name="period" value={period} onChange={this.onChangeHandler('period')}/>
+                <h2>Borrowing</h2>
+                <TextField type="number" label="Amount to borrow" value={borrowing} onChange={this.onChangeHandler('amount')}/>
+                <TextField type="number" label="Rate" value={rate} onChange={this.onChangeHandler('rate')}/>
+                <TextField type="number" label="Loan Period (years)" value={period} onChange={this.onChangeHandler('period')}/>
             </div>
         )
     }

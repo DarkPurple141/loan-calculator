@@ -4,7 +4,7 @@ type Props = {
     children: ReactNode
 }
 
-const container: React.SFC<Props> = ({ children }) => (
+const container: React.FunctionComponent<Props> = ({ children }) => (
     <div className="input-container">
         {children}
     </div>

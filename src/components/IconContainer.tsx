@@ -5,7 +5,7 @@ type Props = {
     onClick: Function
 }
 
-const container: React.SFC<Props> = ({ children, onClick }) => (
+const container: React.FunctionComponent<Props> = ({ children, onClick }) => (
     <a className="icon-container" onClick={(e) => onClick(e)}>
         {children}
     </a>

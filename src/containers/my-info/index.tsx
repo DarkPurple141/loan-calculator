@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import TextField from '@atlaskit/field-text'
+import CloseIcon from '@atlaskit/icon/glyph/cross'
 import AddIcon from '@atlaskit/icon/glyph/add'
 import { FormSection } from '@atlaskit/form';
-
-import InlineContainer from '../../components/InlineContainer'
-import IconContainer from '../../components/IconContainer'
 import LivingExpense from '../../components/LivingExpense'
 
 import { connect } from 'react-redux'
@@ -15,7 +13,8 @@ import ProfileState from '../../store/profile/models'
 
 interface ProfileDispatchers<T> {
     updateIncome: (payload: T) => void,
-    updateExpense: (payload: T) => void,
+    updateExpenseLabel: (payload: T) => void,
+    updateExpenseCost: (payload: T) => void,
     addExpense: (payload: T) => void,
     deleteExpense: (payload: T) => void
 }
@@ -45,15 +44,18 @@ class MyInfo extends Component<IProps, FormState> {
     }
 
     onButtonClick = () => {
-        this.props.addExpense({
-            key: this.state.label,
-            value: this.state.cost
+        this.setState((state) => {
+            this.props.addExpense({
+                key: state.label,
+                value: state.cost
+            })
+            return defaultState
         })
-        this.setState(defaultState)
     }
 
     render() {
         const { incomeA, incomeB, livingExpenses, income } = this.props
+        console.info(this.state)
         return (
             <div className='profile'>  
                 <h2>Profile <code>{ income }</code></h2>
@@ -61,17 +63,27 @@ class MyInfo extends Component<IProps, FormState> {
                 <TextField type="number" label="Your Partner's Income" value={incomeB.value} onChange={this.onUpdateIncome('incomeB')}/>
                 <FormSection title="Living Expenses">
                     { livingExpenses && livingExpenses.map(props => (
-                        <LivingExpense {...props} onUpdateExpense={this.props.updateExpense} onDeleteExpense={this.props.deleteExpense} />
+                        <LivingExpense {...props}
+                            key={props.label}
+                            onEditText={this.props.updateExpenseLabel}
+                            onEditNumber={this.props.updateExpenseCost} 
+                            onClickIcon={this.props.deleteExpense} >
+                            <CloseIcon size="medium" label="close" />
+                        </LivingExpense>
                     ))}
                     <p>Add an expense</p>
-                    <InlineContainer>
-                        <TextField isLabelHidden type="text" label="" value={this.state.label} laceholder='Your expense name'  onChange={(e: any) => this.setState({ label: e.currentTarget.value })}/> 
-                        <TextField isLabelHidden type="number" label="" value={undefined && this.state.cost} placeholder='$0' onChange={(e: any) => this.setState({ cost: Number(e.currentTarget.value) })}/>
-                        <IconContainer onClick={this.onButtonClick}>
-                            <AddIcon size="medium" label="add"/>
-                        </IconContainer>
-                        
-                    </InlineContainer>
+                    <LivingExpense
+                        key="Add Item"
+                        cost={this.state.cost}
+                        label={this.state.label}
+                        onClickIcon={this.onButtonClick}
+                        onEditText={({ value }: any) => this.setState({ label: value })}
+                        onEditNumber={({ value }: any) => this.setState({ cost: value })}
+                        textPlaceholder='Your expense name'
+                        numberPlaceholder='$0'
+                    >
+                        <AddIcon size="medium" label="add"/>
+                    </LivingExpense>
                 </FormSection>
             </div>
         )
