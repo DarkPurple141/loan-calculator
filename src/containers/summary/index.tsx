@@ -17,8 +17,7 @@ class Summary extends Component<SummaryProps> {
     render() {
         return (
             <div className='Summary'>
-                <h2>Summary</h2>       
-                <p>position: { formatCurrency(this.props.position) }</p>
+                <h2>Summary <code>{ formatCurrency(this.props.position) }</code></h2>       
             </div>
         )
     }

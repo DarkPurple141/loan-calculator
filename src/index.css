@@ -23,6 +23,8 @@ code::before {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  margin-top: 24px;
+  margin-bottom: 12px;
   color: black;
 }
 
@@ -42,7 +44,6 @@ label {
 input {
   margin: 0 5px;
   font: inherit;
-  border-bottom: 2px solid #3E50B4;
   text-align: right;
 }
 
@@ -61,7 +62,7 @@ input[type=number]::-webkit-outer-spin-button {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 400px;
+  max-width: 400px;
 }
 
 .input-container > * {
@@ -78,4 +79,11 @@ input[type=number]::-webkit-outer-spin-button {
 
 .icon-container:hover {
   background-color: #eee;
+}
+
+@media screen and (max-width: 600px) {
+  main {
+    margin: 10px auto;
+    padding: 0 10px 10px;
+  }
 }

@@ -55,7 +55,7 @@ class MyInfo extends Component<IProps, FormState> {
 
     render() {
         const { incomeA, incomeB, livingExpenses, income } = this.props
-        console.info(this.state)
+        console.info(livingExpenses)
         return (
             <div className='profile'>  
                 <h2>Profile <code>{ income }</code></h2>
@@ -64,7 +64,7 @@ class MyInfo extends Component<IProps, FormState> {
                 <FormSection title="Living Expenses">
                     { livingExpenses && livingExpenses.map(props => (
                         <LivingExpense {...props}
-                            key={props.label}
+                            key={props.id}
                             onEditText={this.props.updateExpenseLabel}
                             onEditNumber={this.props.updateExpenseCost} 
                             onClickIcon={this.props.deleteExpense} >
@@ -77,7 +77,7 @@ class MyInfo extends Component<IProps, FormState> {
                         cost={this.state.cost}
                         label={this.state.label}
                         onClickIcon={this.onButtonClick}
-                        onEditText={({ value }: any) => this.setState({ label: value })}
+                        onEditText={({ key }: any) => this.setState({ label: key })}
                         onEditNumber={({ value }: any) => this.setState({ cost: value })}
                         textPlaceholder='Your expense name'
                         numberPlaceholder='$0'

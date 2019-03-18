@@ -1,6 +1,7 @@
 export type livingExpense = {
     label: string,
-    cost: number
+    cost: number,
+    id: string
 }
 
 export type Income = {

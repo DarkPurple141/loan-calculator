@@ -2,8 +2,9 @@
 
 // action creators
 declare interface ActionPayload {
-    value?: number | string,
-    key: string
+    value: number,
+    key: string,
+    id?: string
 }
 
 declare type Period = 'Weekly' | 'Fortnightly' | 'Monthly' | 'Yearly'

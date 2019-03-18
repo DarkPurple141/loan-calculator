@@ -1,6 +1,6 @@
 import Costs from './costs/models'
 import Profile from './profile/models'
-import Loan, { REPAYMENT_FREQUENCY } from './loan/models'
+import Loan from './loan/models'
 
 export default interface State {
     costs: Costs,
@@ -22,11 +22,14 @@ const multiplier = (p: Period): number => {
     return m
 }
 
+// HOF that accepts a period and returns a function that does the correct multiple
+const adjustToYearlyValue = (p: Period) => (value: number) => value * multiplier(p)
+
 export const getIncome = (profile: Profile): number => {
     const { incomeA, incomeB } = profile
 
-    const annualisedIncomeA = incomeA.value * multiplier(incomeA.period)
-    const annualisedIncomeB = incomeB.value * multiplier(incomeB.period)
+    const annualisedIncomeA = adjustToYearlyValue(incomeA.period)(incomeA.value)
+    const annualisedIncomeB = adjustToYearlyValue(incomeB.period)(incomeB.value)
 
     return annualisedIncomeA + annualisedIncomeB
 }
@@ -46,14 +49,7 @@ export const getCosts = (costs: Costs): number => {
 export const getLoanCosts = (loan: Loan) => {
     const { period, amount, rate, repaymentFrequency } = loan
 
-    let n: number
-
-    switch (repaymentFrequency) {
-        case REPAYMENT_FREQUENCY.WEEKLY: n = 52;
-        case REPAYMENT_FREQUENCY.FORTNIGHTLY: n = 26;
-        case REPAYMENT_FREQUENCY.MONTHLY: n = 12;
-        default: n = 12;
-    }
+    const n = multiplier(repaymentFrequency)
 
     const periods = n * period
     const r = (rate / n)/100
@@ -65,9 +61,9 @@ export const getLoanCosts = (loan: Loan) => {
 export const getSummary = ({ costs, profile, loan }: State): number => {
 
     const income         = getIncome(profile)
-    const livingExpenses = getLivingExpenses(profile)
+    const livingExpenses = adjustToYearlyValue('Weekly')(getLivingExpenses(profile))
     const expectedCosts  = getCosts(costs)
-    const loanCosts      = getLoanCosts(loan)
+    const loanCosts      = adjustToYearlyValue(loan.repaymentFrequency)(getLoanCosts(loan))
 
     return income - livingExpenses - expectedCosts - loanCosts
 }

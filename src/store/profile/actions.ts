@@ -2,52 +2,32 @@ import * as actions from './action-types'
 import { ActionCreator } from 'redux';
 
 // action creators
-export const updateIncome: ActionCreator<ReduxAction> = ({
-    value,
-    key
-}: ActionPayload): ReduxAction => ({
+export const updateIncome: ActionCreator<ReduxAction> =
+(data: ActionPayload): ReduxAction => ({
     type: actions.SET_PROFILE,
-    data: {
-        [key]: value
-    }
+    data
 })
 
-export const addExpense: ActionCreator<ReduxAction> = ({
-    key,
-    value
-}: ActionPayload): ReduxAction => ({
+export const addExpense: ActionCreator<ReduxAction> =
+(data: ActionPayload): ReduxAction => ({
     type: actions.ADD_EXPENSE,
-    data: {
-        label: key,
-        cost: value
-    }
+    data
 })
 
-export const updateExpenseLabel: ActionCreator<ReduxAction> = ({
-    key,
-    value
-}: ActionPayload): ReduxAction => ({
+export const updateExpenseLabel: ActionCreator<ReduxAction> =
+(data: ActionPayload): ReduxAction => ({
+    type: actions.UPDATE_EXPENSE_KEY,
+    data
+})
+
+export const updateExpenseCost: ActionCreator<ReduxAction> =
+(data: ActionPayload): ReduxAction => ({
     type: actions.UPDATE_EXPENSE,
-    data: {
-        [key]: value
-    }
+    data
 })
 
-export const updateExpenseCost: ActionCreator<ReduxAction> = ({
-    key,
-    value
-}: ActionPayload): ReduxAction => ({
-    type: actions.UPDATE_EXPENSE,
-    data: {
-        [key]: value
-    }
-})
-
-export const deleteExpense: ActionCreator<ReduxAction> = ({
-    key,
-}: ActionPayload): ReduxAction => ({
+export const deleteExpense: ActionCreator<ReduxAction> =
+(data: ActionPayload): ReduxAction => ({
     type: actions.DELETE_EXPENSE,
-    data: {
-        key
-    }
+    data
 })

@@ -12,7 +12,8 @@ const initialState: ProfileState = {
     },
     livingExpenses: [{
         label: 'daycare',
-        cost: 100
+        cost: 100,
+        id: 'first'
     }]
 }
 
@@ -22,9 +23,14 @@ export default function (
 ): ProfileState {
     const { type, data } = action
 
+    // safety
+    if (!(type in actions))
+        return state
+
+    const { key, value, id } = data
+
     switch (type) {
         case actions.SET_PROFILE:
-            let [key, value] = Object.entries(data)[0]
             return {
                 ...state,
                 [key]: {
@@ -33,9 +39,9 @@ export default function (
                 }
             }
         case actions.ADD_EXPENSE:
-            const { label, cost } = data as any
+            // for duplicate keys
             if (state.livingExpenses.find(
-                ({ label: existingLabel }) => existingLabel === label))
+                ({ label: existingLabel }) => existingLabel === key))
                 return {
                     ...state
                 }
@@ -43,26 +49,38 @@ export default function (
                 ...state,
                 livingExpenses: state.livingExpenses
                     .concat({
-                        label,
-                        cost
+                        label: key,
+                        cost: value!,
+                        id: String(Date.now())
                     })
             }
         case actions.DELETE_EXPENSE:
-            const { key: toDelete } = data as any
             return {
                 ...state,
                 livingExpenses: state.livingExpenses
-                    .filter(({ label }) => toDelete !== label)
+                    .filter(({ id: idToFind }) => id !== idToFind)
             }
 
         case actions.UPDATE_EXPENSE:
-            [key, value] = Object.entries(data)[0]
             return {
                 ...state,
                 livingExpenses: state.livingExpenses
-                    .map((item) => {
-                        if (item.label === key) {
-                            item.cost = (value as number)
+                    .map(item => {
+                        if (item.id === id) {
+                            item.cost = value!
+                        }
+                        return item
+                    })
+            }
+
+        case actions.UPDATE_EXPENSE_KEY:
+            console.info('here', key, id, value)
+            return {
+                ...state,
+                livingExpenses: state.livingExpenses
+                    .map(item => {
+                        if (item.id === id) {
+                            item.label = key
                         }
                         return item
                     })

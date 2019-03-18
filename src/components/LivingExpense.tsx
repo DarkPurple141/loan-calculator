@@ -27,12 +27,23 @@ const LivingExpense: React.FunctionComponent<Props> = ({
     onEditNumber,
     textPlaceholder,
     numberPlaceholder,
-    children
+    children,
+    ...other
 }) => (
     <InlineContainer>
-        <FieldTextStateless onKeyDown={(e: KeyboardEvent) => enterHandler(e, () => onClickIcon({ key: label }))} placeholder={textPlaceholder} isLabelHidden type="text" label="" value={label} onChange={(e: any) => onEditText({ key: label, value: e.target.value})} />
-        <FieldTextStateless onKeyDown={(e: KeyboardEvent) => enterHandler(e, () => onClickIcon({ key: label }))} placeholder={numberPlaceholder} isLabelHidden type="number" label="" value={cost || ""} onChange={(e: any) => onEditNumber({ key: label, value: Number(e.target.value) })} />
-        <IconContainer onClick={() => onClickIcon({ key: label })}>
+        <FieldTextStateless 
+            onKeyDown={(e: KeyboardEvent) => enterHandler(e, () => onClickIcon({ key: label, id: (other as any).id!, value: cost }))}
+            placeholder={textPlaceholder}
+            isLabelHidden type="text" label=""
+            value={label} 
+            onChange={(e: any) => onEditText({ key: e.target.value, id: (other as any).id!})} />
+        <FieldTextStateless 
+            onKeyDown={(e: KeyboardEvent) => enterHandler(e, () => onClickIcon({ key: label, id: (other as any).id!, value: cost  }))}
+            placeholder={numberPlaceholder}
+            isLabelHidden type="number" label=""
+            value={cost || ""} 
+            onChange={(e: any) => onEditNumber({ key: label, value: Number(e.target.value), id: (other as any).id!  })} />
+        <IconContainer onClick={() => onClickIcon({ key: label, id: (other as any).id!, value: cost })}>
             {children}
         </IconContainer>
     </InlineContainer>
