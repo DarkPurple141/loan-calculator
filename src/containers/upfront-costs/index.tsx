@@ -7,6 +7,8 @@ import Cost from '../../store/costs/models'
 import State, { getCosts } from '../../store/selectors'
 import TextField from '@atlaskit/field-text'
 
+import ContentSection from '../../components/ContentSection'
+
 interface summaryProps {
     overallCost: number
 }
@@ -29,13 +31,14 @@ class Costs extends Component<CostProps & CostDispatchers<ActionPayload>> {
     render() {
         const { conveyancing, bankFees, renovations, stampDuty } = this.props
         return (
-            <div className='costs'>
-                <h2>Other Costs <code>{ this.props.overallCost }</code></h2>
+            <ContentSection
+                header={<h2>Other Costs <code>{ this.props.overallCost }</code></h2>}
+            >
                 <TextField type="number" label="Conveyancing" value={conveyancing} onChange={this.onChangeHandler('conveyancing')}/>
                 <TextField type="number" label="Bank Fees" value={bankFees} onChange={this.onChangeHandler('bankFees')}/>
                 <TextField type="number" label="Stamp Duty" value={stampDuty} onChange={this.onChangeHandler('stampDuty')}/>
                 <TextField type="number" label="Renovations" value={renovations} onChange={this.onChangeHandler('renovations')}/>
-            </div>
+            </ContentSection>
         )
     }
 }

@@ -3,7 +3,8 @@ import { bindActionCreators } from 'redux'
 import TextField from '@atlaskit/field-text'
 import CloseIcon from '@atlaskit/icon/glyph/cross'
 import AddIcon from '@atlaskit/icon/glyph/add'
-import { FormSection } from '@atlaskit/form';
+import { FormSection } from '@atlaskit/form'
+import ContentSection from '../../components/ContentSection'
 import LivingExpense from '../../components/LivingExpense'
 
 import { connect } from 'react-redux'
@@ -55,10 +56,11 @@ class MyInfo extends Component<IProps, FormState> {
 
     render() {
         const { incomeA, incomeB, livingExpenses, income } = this.props
-        console.info(livingExpenses)
         return (
-            <div className='profile'>  
-                <h2>Profile <code>{ income }</code></h2>
+            <ContentSection 
+                header={(<h2>Profile <code>{ income }</code></h2>)}
+                isDefaultExpanded
+            >
                 <TextField autoFocus type="number" label="Your Income" value={incomeA.value} onChange={this.onUpdateIncome('incomeA')}/>
                 <TextField type="number" label="Your Partner's Income" value={incomeB.value} onChange={this.onUpdateIncome('incomeB')}/>
                 <FormSection title="Living Expenses">
@@ -85,7 +87,7 @@ class MyInfo extends Component<IProps, FormState> {
                         <AddIcon size="medium" label="add"/>
                     </LivingExpense>
                 </FormSection>
-            </div>
+            </ContentSection>
         )
     }
 }

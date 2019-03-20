@@ -3,6 +3,7 @@
     "target": "es5",
     "module": "esnext",
     "lib": [
+      "dom",
       "es2017"
     ],
     "removeComments": false,
@@ -14,6 +15,7 @@
     "skipLibCheck": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
