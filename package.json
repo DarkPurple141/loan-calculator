@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "clean": "rm -rf docs build",
+    "clean": "rm -rf build",
     "build": "react-scripts build",
-    "postbuild": "react-snap && mv build docs",
+    "postbuild": "react-snap",
     "deploy": "npm run clean && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
