@@ -2,7 +2,11 @@ import { AnyAction } from 'redux';
 
 declare global {
     interface ReduxAction extends AnyAction {
-        data: object
+        data: {
+            key: string,
+            value?: number,
+            readonly id?: string 
+        }
     }
 }
 

@@ -14,11 +14,17 @@ export default function (
 ): PurchaseCosts {
     const { type, data } = action
 
+    // safety
+    if (!(type in actions))
+        return state
+
+    const { key, value } = data
+
     switch (type) {
         case actions.SET_COSTS:
             return {
                 ...state,
-                ...data
+                [key]: value
             }
         default: 
             return state

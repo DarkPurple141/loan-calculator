@@ -3,7 +3,8 @@ import { bindActionCreators } from 'redux'
 import TextField from '@atlaskit/field-text'
 import CloseIcon from '@atlaskit/icon/glyph/cross'
 import AddIcon from '@atlaskit/icon/glyph/add'
-import { FormSection } from '@atlaskit/form';
+import { FormSection } from '@atlaskit/form'
+import ContentSection from '../../components/ContentSection'
 import LivingExpense from '../../components/LivingExpense'
 
 import { connect } from 'react-redux'
@@ -55,16 +56,17 @@ class MyInfo extends Component<IProps, FormState> {
 
     render() {
         const { incomeA, incomeB, livingExpenses, income } = this.props
-        console.info(this.state)
         return (
-            <div className='profile'>  
-                <h2>Profile <code>{ income }</code></h2>
+            <ContentSection 
+                header={(<h2>Profile <code>{ income }</code></h2>)}
+                isDefaultExpanded
+            >
                 <TextField autoFocus type="number" label="Your Income" value={incomeA.value} onChange={this.onUpdateIncome('incomeA')}/>
                 <TextField type="number" label="Your Partner's Income" value={incomeB.value} onChange={this.onUpdateIncome('incomeB')}/>
                 <FormSection title="Living Expenses">
                     { livingExpenses && livingExpenses.map(props => (
                         <LivingExpense {...props}
-                            key={props.label}
+                            key={props.id}
                             onEditText={this.props.updateExpenseLabel}
                             onEditNumber={this.props.updateExpenseCost} 
                             onClickIcon={this.props.deleteExpense} >
@@ -77,7 +79,7 @@ class MyInfo extends Component<IProps, FormState> {
                         cost={this.state.cost}
                         label={this.state.label}
                         onClickIcon={this.onButtonClick}
-                        onEditText={({ value }: any) => this.setState({ label: value })}
+                        onEditText={({ key }: any) => this.setState({ label: key })}
                         onEditNumber={({ value }: any) => this.setState({ cost: value })}
                         textPlaceholder='Your expense name'
                         numberPlaceholder='$0'
@@ -85,7 +87,7 @@ class MyInfo extends Component<IProps, FormState> {
                         <AddIcon size="medium" label="add"/>
                     </LivingExpense>
                 </FormSection>
-            </div>
+            </ContentSection>
         )
     }
 }
