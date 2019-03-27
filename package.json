@@ -6,8 +6,8 @@
     "start": "react-scripts start",
     "clean": "rm -rf docs build",
     "build": "react-scripts build",
-    "postbuild": "react-snap",
-    "deploy": "npm run clean && npm run build && npm run postbuild",
+    "postbuild": "react-snap && mv build docs",
+    "deploy": "npm run clean && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
