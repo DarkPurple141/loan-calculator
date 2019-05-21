@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/DarkPurple141/loan-calculator/compare/v1.0.0...v1.0.1) (2019-05-21)
+
+
+### Bug Fixes
+
+* a11y linting broke build ([3d5f138](https://github.com/DarkPurple141/loan-calculator/commit/3d5f138))
+
 # 1.0.0 (2019-05-21)
 
 
