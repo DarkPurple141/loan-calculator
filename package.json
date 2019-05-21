@@ -4,7 +4,7 @@
   "homepage": "https://loan.alhinds.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DarkPurple141/loan-calculator/tree/master"
+    "url": "https://github.com/DarkPurple141/loan-calculator"
   },
   "private": true,
   "scripts": {
@@ -26,23 +26,26 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "react": "^16.6.1",
-    "react-dom": "^16.6.1",
-    "react-redux": "^6.0.1",
-    "react-scripts": "^2.1.8"
-  },
-  "devDependencies": {
     "@atlaskit/field-text": "^8.0.0",
     "@atlaskit/form": "^5.2.2",
     "@atlaskit/page-header": "^7.0.0",
     "@atlaskit/panel": "^0.1.1",
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1",
+    "react-redux": "^6.0.1",
+    "react-scripts": "^3.0.0",
+    "styled-components": "^3.4.10"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^3.0.2",
+    "@semantic-release/git": "^7.0.8",
     "@types/jest": "^23.3.9",
     "@types/node": "^10.12.5",
     "@types/react": "^16.7.3",
     "@types/react-dom": "^16.0.9",
     "@types/react-redux": "^7.0.1",
     "react-snap": "^1.23.0",
-    "styled-components": "^3.4.10",
+    "semantic-release": "^15.13.12",
     "typescript": "^3.3.3333"
   }
 }
