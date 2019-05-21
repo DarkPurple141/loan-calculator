@@ -6,9 +6,9 @@ type Props = {
 }
 
 const container: React.FunctionComponent<Props> = ({ children, onClick }) => (
-    <a className="icon-container" onClick={(e) => onClick(e)}>
+    <button className="icon-container" onClick={(e) => onClick(e)}>
         {children}
-    </a>
+    </button>
 )
 
 export default container
