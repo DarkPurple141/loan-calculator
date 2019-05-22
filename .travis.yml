@@ -4,6 +4,7 @@ node_js:
 cache: npm
 script:
   - npm run deploy
+  - npx semantic-release
 deploy:
   provider: pages
   local_dir: build
