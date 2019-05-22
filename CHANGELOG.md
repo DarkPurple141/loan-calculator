@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/DarkPurple141/loan-calculator/compare/v1.0.1...v1.0.2) (2019-05-22)
+
+
+### Bug Fixes
+
+* **analytics:** removed new relic browser ([3d69437](https://github.com/DarkPurple141/loan-calculator/commit/3d69437))
+
 ## [1.0.1](https://github.com/DarkPurple141/loan-calculator/compare/v1.0.0...v1.0.1) (2019-05-21)
 
 
